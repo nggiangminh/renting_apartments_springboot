@@ -18,6 +18,6 @@ public class ApartmentController {
     public String getAllApartment(Model model){
         List<Apartment> apartments = apartmentRepository.findAll();
         model.addAttribute("apartments", apartments);
-        return "Home";
+        return "apartmentList";
     }
 }

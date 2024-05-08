@@ -21,7 +21,8 @@
 @REM Apache Maven Wrapper startup batch script, version 3.2.0
 @REM
 @REM Required ENV vars:
-@REM JAVA_HOME - location of a JDK home dir
+@REM JAVA_
+HOME - location of a JDK home dir
 @REM
 @REM Optional ENV vars
 @REM MAVEN_BATCH_ECHO - set to 'on' to enable the echoing of the batch commands
