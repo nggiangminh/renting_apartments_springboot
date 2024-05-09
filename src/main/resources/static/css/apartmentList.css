@@ -1,7 +1,8 @@
         body {
         margin: 0;}
         .apartment-card {
-            margin : 50;
+            margin : 1%;
+            padding : 1%;
             border: 1px solid #ccc;
             border-radius: 10px; /* Bo cong các góc của thẻ */
             background-color: #FFCC80; /* Màu nền vàng cam */
