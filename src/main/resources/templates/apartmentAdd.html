@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Add apartment</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div>
+    <h2>ADD Apartment</h2>
+    <form th:action="'/insert'" th:object="${apartment}" method="post">
+        <p>
+            <label>apartment name: </label>
+            <input type="text" th:field="*{name}">
+        </p>
+        <p>
+            <label>apartment price: </label>
+            <input type="number" th:field="*{price}">
+        </p>
+        <p class="form-group">
+            <label>apartment image: </label>
+            <input type="text" th:field="*{image}">
+        </p>
+        <p class="form-group">
+            <label>apartment address </label>
+            <input type="text" th:field="*{address}">
+        </p>
+        <p>
+            <button type="submit">ADD</button>
+        </p>
+    </form>
+</div>
+</div>
+</body>
+</html>
