@@ -1,7 +1,10 @@
 package fit.se2.springboot.model;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
 public class Apartment {
@@ -9,9 +12,17 @@ public class Apartment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
+
+    @Length(min = 3, max = 30)
     private String name;
+
+    @Min(0)
     private double price;
+
+    @NotEmpty(message = "Image cannot be empty")
     private String image;
+
+    @NotEmpty(message = "Image cannot be empty")
     private String address;
 
     public Long getId() {
