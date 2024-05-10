@@ -1,44 +1,48 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="_layout.html">
+      layout:decorate="_layout">
 <head>
     <meta charset="UTF-8">
-    <title>Update Apartment</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Edit Apartment</title>
 </head>
 <body>
 <div layout:fragment="content">
-<div>
-    <h2>UPDATE Apartment</h2>
+    <h2>UPDATE apartment</h2>
     <form method="post" th:action="'/save'">
-        <input type="hidden" th:field="${apartment.id}">
-        <p>
+        <input type="hidden" th:field="${apartment.id}"/>
+        <div class="control-group">
             <label>apartment name:</label>
-            <input class="form-control" type="text"
-                   th:field="${apartment.name}">
-        </p>
-        <p>
+            <input type="text" th:field="${apartment.name}"/>
+            <div th:if="${#fields.hasErrors('apartment.name')}"
+                 th:errorclass="error" th:errors="${apartment.name}"/>
+        </div>
+        <div class="control-group">
             <label>apartment price:</label>
-            <input class="form-control" type="number"
-                   th:field="${apartment.price}">
-        </p>
-        <p class="form-group">
-            <label>apartment image:</label><br>
-            <img th:src="${apartment.image}" width="100" height="100">
-            <input class="form-control" type="text"
-                   th:field="${apartment.image}">
-        </p>
-        <p class="form-group">
-            <label>apartment address:</label>
-            <input class="form-control" type="text"
-                   th:field="${apartment.address}">
-        </p>
-        <p>
+            <input type="number" th:field="${apartment.price}"/>
+            <div th:if="${#fields.hasErrors('apartment.price')}"
+                 th:errorclass="error" th:errors="${apartment.price}"/>
+        </div>
+        <div class="control-group">
+            <label>apartment image:<br>
+                <img th:src="${apartment.image}" width="100" height="100"/>
+                <input type="text" th:field="${apartment.image}"/>
+                <div th:if="${#fields.hasErrors('apartment.image')}"
+                     th:errorclass="error" th:errors="${apartment.image}"/>
+            </label>
+        </div>
+        <div class="control-group">
+            <label>apartment address:
+                <input type="text" th:field="${apartment.address}"/>
+                <div th:if="${#fields.hasErrors('apartment.address')}"
+                     th:errorclass="error" th:errors="${apartment.address}"/>
+            </label>
+        </div>
+        <div class="control-group">
             <button type="submit">UPDATE</button>
-        </p>
+        </div>
     </form>
 </div>
-</div>
-
 </body>
 </html>

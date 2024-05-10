@@ -2,9 +2,11 @@ package fit.se2.springboot.controller;
 
 import fit.se2.springboot.model.Apartment;
 import fit.se2.springboot.repository.ApartmentRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -17,7 +19,13 @@ public class ApartmentController {
     @Autowired
     ApartmentRepository apartmentRepository;
 
-    @RequestMapping(value = "/")
+
+    @RequestMapping(value = "/home")
+    public String homePage(Model model) {
+        return "home";
+    }
+
+    @RequestMapping(value = "/apartment/list")
     public String getAllApartment(Model model){
         List<Apartment> apartments = apartmentRepository.findAll();
         model.addAttribute("apartments", apartments);
@@ -40,9 +48,14 @@ public class ApartmentController {
     }
 
     @RequestMapping(value = "/save")
-    public String saveUpdate(Apartment apartment){
-        apartmentRepository.save(apartment);
-        return "redirect:/update/" + apartment.getId();
+    public String saveUpdate(@Valid Apartment apartment, BindingResult result){
+       if (result.hasErrors()){
+           return "apartmentUpdate";
+       }
+       else {
+            apartmentRepository.save(apartment);
+            return "redirect:/update/" + apartment.getId();
+        }
     }
 
 
@@ -54,9 +67,15 @@ public class ApartmentController {
     }
 
     @RequestMapping(value = "/insert")
-    public String insertEmployee(Apartment apartment){
-        apartmentRepository.save(apartment);
-        return "redirect:/detail/" + apartment.getId();
+    public String insertEmployee(@Valid Apartment apartment, BindingResult result){
+        if (result.hasErrors()){
+            return "apartmentAdd";
+        }
+        else{
+            apartmentRepository.save(apartment);
+            return "redirect:/detail/" + apartment.getId();
+        }
+
     }
 
     @RequestMapping(value = "/delete/{id}")
@@ -67,6 +86,4 @@ public class ApartmentController {
         }
         return "redirect:/" ;
     }
-
-
 }

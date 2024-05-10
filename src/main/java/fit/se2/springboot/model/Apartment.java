@@ -22,7 +22,7 @@ public class Apartment {
     @NotEmpty(message = "Image cannot be empty")
     private String image;
 
-    @NotEmpty(message = "Image cannot be empty")
+    @NotEmpty(message = "Address cannot be empty")
     private String address;
 
     public Long getId() {
@@ -51,7 +51,7 @@ public class Apartment {
 
     public String getImage() {
         return image;
-    }    
+    }
 
     public void setImage(String image) {
         this.image = image;

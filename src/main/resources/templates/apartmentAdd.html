@@ -4,6 +4,7 @@
       layout:decorate="_layout.html">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <title>Add apartment</title>
 </head>
 <body>
@@ -11,25 +12,33 @@
 <div>
     <h2>ADD Apartment</h2>
     <form th:action="'/insert'" th:object="${apartment}" method="post">
-        <p>
-            <label>apartment name: </label>
-            <input type="text" th:field="*{name}">
-        </p>
-        <p>
-            <label>apartment price: </label>
-            <input type="number" th:field="*{price}">
-        </p>
-        <p class="form-group">
-            <label>apartment image: </label>
-            <input type="text" th:field="*{image}">
-        </p>
-        <p class="form-group">
-            <label>apartment address </label>
-            <input type="text" th:field="*{address}">
-        </p>
-        <p>
+        <div class="control-group">
+            <label>Apartment name: </label>
+            <input type="text" th:field="*{name}"/>
+            <div th:if="${#fields.hasErrors('name')}"
+                 th:errorclass="error" th:errors="*{name}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment price: </label>
+            <input type="number" th:field="*{price}"/>
+            <div th:if="${#fields.hasErrors('price')}"
+                 th:errorclass="error" th:errors="*{price}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment image: </label>
+            <input type="text" th:field="*{image}"/>
+            <div th:if="${#fields.hasErrors('image')}"
+                 th:errorclass="error" th:errors="*{image}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment address: </label>
+            <input type="text" th:field="*{address}"/>
+            <div th:if="${#fields.hasErrors('address')}"
+                 th:errorclass="error" th:errors="*{address}"/>
+        </div>
+        <div class="control-group">
             <button type="submit">ADD</button>
-        </p>
+        </div>
     </form>
 </div>
 </div>
