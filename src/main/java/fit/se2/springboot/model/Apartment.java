@@ -1,19 +1,53 @@
 package fit.se2.springboot.model;
 
-
 import jakarta.persistence.*;
+import java.util.Date;
 
 @Entity
+@Table(name = "apartments")
 public class Apartment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
-    private String name;
-    private double price;
-    private String image;
-    private String address;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    private User owner;
+
+    @Column(nullable = false)
+    private String status;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(length = 5000)
+    private String images; // This could be a JSON string or comma-separated values
+
+    @Column(nullable = false)
+    private Double area;
+
+    @Column(nullable = false)
+    private Double price;
+
+    @Column(nullable = false)
+    private String location;
+
+    @Column(length = 5000)
+    private String amenities;
+
+    @Column(length = 5000)
+    private String description;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update")
+    private Date lastUpdate;
+
+    // Constructors
+    public Apartment() {
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -22,35 +56,83 @@ public class Apartment {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public User getOwner() {
+        return owner;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
-    public double getPrice() {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public Double getArea() {
+        return area;
+    }
+
+    public void setArea(Double area) {
+        this.area = area;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public String getImage() {
-        return image;
-    }    
-
-    public void setImage(String image) {
-        this.image = image;
+    public String getLocation() {
+        return location;
     }
 
-    public String getAddress() {
-        return address;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getAmenities() {
+        return amenities;
+    }
+
+    public void setAmenities(String amenities) {
+        this.amenities = amenities;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 }
