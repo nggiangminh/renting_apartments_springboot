@@ -1,0 +1,42 @@
+
+.form {
+    max-width: 300px;
+    margin: 3% auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: #333;
+    border-radius: 3px;
+    display: block;
+    padding: 5% 2%;
+  }
+
+  .form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .form input[type="text"],
+  .form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .form input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .form input[type="submit"]:hover {
+    background-color: #45a049;
+  }

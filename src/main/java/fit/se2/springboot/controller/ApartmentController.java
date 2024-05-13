@@ -24,9 +24,25 @@ public class ApartmentController {
     public String homePage(Model model) {
         return "home";
     }
+    @RequestMapping(value = "/login")
+    public String loginPage(Model model) {
+        return "logIn";
+    }
 
-    @RequestMapping(value = "/apartment/list")
+    @RequestMapping(value = "/signup")
+    public String signupPage(Model model) {
+        return "signup";
+    }
+
+    @RequestMapping(value = "/manage")
     public String getAllApartment(Model model){
+        List<Apartment> apartments = apartmentRepository.findAll();
+        model.addAttribute("apartments", apartments);
+        return "manageApartment";
+
+
+    }    @RequestMapping(value = "/apartment")
+    public String AllApartment(Model model){
         List<Apartment> apartments = apartmentRepository.findAll();
         model.addAttribute("apartments", apartments);
         return "apartmentList";
