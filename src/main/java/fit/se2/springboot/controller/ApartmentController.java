@@ -4,11 +4,14 @@ import fit.se2.springboot.model.Apartment;
 import fit.se2.springboot.service.ApartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+import java.util.List;
 
 @Controller
-@RequestMapping(value= "/apartments")
+@RequestMapping("/apartment")
 public class ApartmentController {
 
     private final ApartmentService apartmentService;
@@ -20,8 +23,9 @@ public class ApartmentController {
     // List all apartments
     @GetMapping("/")
     public String listApartments(Model model) {
-        model.addAttribute("apartments", apartmentService.findAll());
-        return "apartmentsList";
+        List<Apartment> apartments = apartmentService.findAll();
+        model.addAttribute("apartments", apartments);
+        return "apartmentList";
     }
 
     // Display one apartment by ID
@@ -33,17 +37,46 @@ public class ApartmentController {
     }
 
     // Display form to add a new apartment
-    @GetMapping("/new")
+    @GetMapping("/add")
     public String newApartmentForm(Model model) {
         model.addAttribute("apartment", new Apartment());
         return "apartmentAdd";  // add-apartment-form.html
     }
 
     // Process the form to add a new apartment
-    @PostMapping("/")
-    public String addApartment(@ModelAttribute Apartment apartment) {
+    @PostMapping("/insert")
+    public String addApartment(@Valid @ModelAttribute Apartment apartment, BindingResult result) {
+        if (result.hasErrors()) {
+            return "apartmentAdd";
+        }
         apartmentService.saveApartment(apartment);
-        return "redirect:/apartments/";  // Redirect after post
+        return "redirect:/apartments/";
+    }
+
+    // Update an existing apartment
+    @GetMapping("/update/{id}")
+    public String showUpdateForm(@PathVariable Long id, Model model) {
+        Apartment apartment = apartmentService.getApartmentById(id);
+        if (apartment == null) {
+            return "redirect:/apartments/";
+        }
+        model.addAttribute("apartment", apartment);
+        return "apartmentUpdate";
+    }
+
+    @PostMapping("/save")
+    public String updateApartment(@PathVariable Long id, @Valid @ModelAttribute Apartment apartment, BindingResult result) {
+        if (result.hasErrors()) {
+            return "apartmentUpdate";
+        }
+        apartmentService.updateApartment(id, apartment);
+        return "redirect:/apartments/" + id;
+    }
+
+    // Delete an apartment
+    @GetMapping("/delete/{id}")
+    public String deleteApartment(@PathVariable Long id) {
+        apartmentService.deleteApartment(id);
+        return "redirect:/apartments/";
     }
 }
-

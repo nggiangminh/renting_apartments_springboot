@@ -3,7 +3,7 @@ package fit.se2.springboot.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "ratings")
+@Table(name = "rating")
 public class Rating {
 
     @Id

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Add apartment</title>
+</head>
+<body>
+<div layout:fragment="content">
+<div>
+    <h2>ADD Apartment</h2>
+    <form th:action="'/apartment/insert'" th:object="${apartment}" method="post">
+        <div class="control-group">
+            <label>Apartment name: </label>
+            <input type="text" th:field="*{name}"/>
+            <div th:if="${#fields.hasErrors('name')}"
+                 th:errorclass="error" th:errors="*{name}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment price: </label>
+            <input type="number" th:field="*{price}"/>
+            <div th:if="${#fields.hasErrors('price')}"
+                 th:errorclass="error" th:errors="*{price}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment image: </label>
+            <input type="text" th:field="*{image}"/>
+            <div th:if="${#fields.hasErrors('image')}"
+                 th:errorclass="error" th:errors="*{image}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment address: </label>
+            <input type="text" th:field="*{address}"/>
+            <div th:if="${#fields.hasErrors('address')}"
+                 th:errorclass="error" th:errors="*{address}"/>
+        </div>
+        <div class="control-group">
+            <button type="submit">ADD</button>
+        </div>
+    </form>
+</div>
+</div>
+</body>
+</html>

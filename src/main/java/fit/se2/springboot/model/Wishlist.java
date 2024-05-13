@@ -3,7 +3,7 @@ package fit.se2.springboot.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "wishlists")
+@Table(name = "wishlist")
 public class Wishlist {
 
     @Id

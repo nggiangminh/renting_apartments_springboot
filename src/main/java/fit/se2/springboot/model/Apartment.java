@@ -2,9 +2,13 @@ package fit.se2.springboot.model;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
+
 
 @Entity
-@Table(name = "apartments")
+@Table(name = "apartment")
 public class Apartment {
 
     @Id
@@ -12,17 +16,17 @@ public class Apartment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "owner_id", nullable = false)
+//    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
     @Column(nullable = false)
-    private String status;
+    private String status = "AVAILABLE";
 
     @Column(nullable = false)
     private String title;
 
     @Column(length = 5000)
-    private String images; // This could be a JSON string or comma-separated values
+    private String image; // This could be a JSON string or comma-separated values
 
     @Column(nullable = false)
     private Double area;
@@ -31,7 +35,7 @@ public class Apartment {
     private Double price;
 
     @Column(nullable = false)
-    private String location;
+    private String address;
 
     @Column(length = 5000)
     private String amenities;
@@ -41,28 +45,16 @@ public class Apartment {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
-    private Date lastUpdate;
+    private Date lastUpdate = new Date();
 
     // Constructors
     public Apartment() {
     }
 
     // Getters and Setters
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
+    @Length(min = 3, max = 30)
+    private String name;
 
     public String getStatus() {
         return status;
@@ -80,12 +72,12 @@ public class Apartment {
         this.title = title;
     }
 
-    public String getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Double getArea() {
@@ -104,12 +96,12 @@ public class Apartment {
         this.price = price;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAddress() {
+        return address;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getAmenities() {
@@ -134,5 +126,21 @@ public class Apartment {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public User getOwner() {
+        return owner;
     }
 }

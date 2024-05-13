@@ -44,7 +44,7 @@ public class ApartmentService {
         apartment.setStatus(apartmentDetails.getStatus());
         apartment.setArea(apartmentDetails.getArea());
         apartment.setPrice(apartmentDetails.getPrice());
-        apartment.setLocation(apartmentDetails.getLocation());
+        apartment.setAddress(apartmentDetails.getAddress());
         apartment.setDescription(apartmentDetails.getDescription());
         apartment.setAmenities(apartmentDetails.getAmenities());
         return apartmentRepository.save(apartment);
