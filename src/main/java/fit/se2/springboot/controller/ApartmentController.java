@@ -21,7 +21,7 @@ public class ApartmentController {
     }
 
     // List all apartments
-    @GetMapping("/")
+    @GetMapping("")
     public String listApartments(Model model) {
         List<Apartment> apartments = apartmentService.findAll();
         model.addAttribute("apartments", apartments);
