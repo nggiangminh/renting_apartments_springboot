@@ -25,7 +25,7 @@ public class User {
 
     private String phoneNumber;
 
-    private String role;
+
 
     // Add relationship mappings
     @OneToMany(mappedBy = "owner")
@@ -63,13 +63,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getRole() {
-        return role;
-    }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public Set<Apartment> getApartments() {
         return apartments;
