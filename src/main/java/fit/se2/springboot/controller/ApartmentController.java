@@ -50,7 +50,7 @@ public class ApartmentController {
             return "apartmentAdd";
         }
         apartmentService.saveApartment(apartment);
-        return "redirect:/apartments/";
+        return "redirect:/apartment/";
     }
 
     // Update an existing apartment
@@ -58,7 +58,7 @@ public class ApartmentController {
     public String showUpdateForm(@PathVariable Long id, Model model) {
         Apartment apartment = apartmentService.getApartmentById(id);
         if (apartment == null) {
-            return "redirect:/apartments/";
+            return "redirect:/apartment/";
         }
         model.addAttribute("apartment", apartment);
         return "apartmentUpdate";
@@ -70,13 +70,13 @@ public class ApartmentController {
             return "apartmentUpdate";
         }
         apartmentService.updateApartment(id, apartment);
-        return "redirect:/apartments/" + id;
+        return "redirect:/apartment/" + id;
     }
 
     // Delete an apartment
     @GetMapping("/delete/{id}")
     public String deleteApartment(@PathVariable Long id) {
         apartmentService.deleteApartment(id);
-        return "redirect:/apartments/";
+        return "redirect:/apartment/";
     }
 }
