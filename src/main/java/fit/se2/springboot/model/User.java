@@ -25,8 +25,6 @@ public class User {
 
     private String phoneNumber;
 
-    private String role;
-
     // Add relationship mappings
     @OneToMany(mappedBy = "owner")
     private final Set<Apartment> apartments = new HashSet<>();
@@ -61,14 +59,6 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public Set<Apartment> getApartments() {
