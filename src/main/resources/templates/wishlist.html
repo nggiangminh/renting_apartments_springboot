@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Wishlist</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handler for adding an apartment to the wishlist
+            $('.add-to-wishlist').on('click', function() {
+                var apartmentId = $(this).data('apartment-id');
+                $.post('/wishlist/add/' + apartmentId, function(data) {
+                    alert(data);  // Alert the response message
+                    location.reload();  // Optionally, change the icon instead of reloading the page
+                }).fail(function() {
+                    alert('Failed to add to wishlist.');
+                });
+            });
+
+            // Handler for removing an apartment from the wishlist
+            $('.remove-from-wishlist').on('click', function() {
+                var apartmentId = $(this).data('apartment-id');
+                $.post('/wishlist/remove/' + apartmentId, function(data) {
+                    alert(data);  // Alert the response message
+                    location.reload();  // Optionally, change the icon instead of reloading the page
+                }).fail(function() {
+                    alert('Failed to remove from wishlist.');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>My Wishlist</h1>
+<div th:if="${wishlist?.apartments?.empty}">
+    <p>Your wishlist is empty.</p>
+    <p>Looks like you haven't added any apartments to your wishlist yet! Browse our <a href="/apartments">apartments</a> to find your next dream home.</p>
+</div>
+<div th:if="not ${wishlist?.apartments?.empty}">
+    <ul>
+        <li th:each="apartment : ${wishlist.apartments}">
+            <span th:text="${apartment.description}">Apartment Description</span>
+            <!-- Remove button -->
+            <button class="remove-from-wishlist" th:data-apartment-id="${apartment.id}">
+                Remove
+            </button>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

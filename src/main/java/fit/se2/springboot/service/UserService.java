@@ -17,11 +17,6 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    // Find all users
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
     // Find a user by ID
     public User getUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
@@ -37,19 +32,5 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // Update a user
-    public User updateUser(Long id, User userDetails) {
-        User user = getUserById(id);
-        user.setEmail(userDetails.getEmail());
-        user.setFirstName(userDetails.getFirstName());
-        user.setLastName(userDetails.getLastName());
-        user.setPhoneNumber(userDetails.getPhoneNumber());
-        return userRepository.save(user);
-    }
-
-    // Delete a user
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
-    }
 }
 

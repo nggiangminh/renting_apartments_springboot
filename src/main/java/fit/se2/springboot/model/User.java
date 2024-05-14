@@ -12,6 +12,8 @@ public class User {
     // Relationship from the first class
     @OneToMany(mappedBy = "owner")
     private final Set<Apartment> apartments = new HashSet<>();
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Wishlist wishlist = new Wishlist(this);
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -89,5 +91,17 @@ public class User {
 
     public Set<Apartment> getApartments() {
         return apartments;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 }

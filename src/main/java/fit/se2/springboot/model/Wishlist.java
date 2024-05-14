@@ -2,6 +2,9 @@ package fit.se2.springboot.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "wishlist")
 public class Wishlist {
@@ -10,27 +13,46 @@ public class Wishlist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "tenant_id", nullable = false)
-    private User tenant;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "apartment_id", nullable = false)
-    private Apartment apartment;
+    @ManyToMany
+    @JoinTable(
+            name = "wishlist_apartments",
+            joinColumns = @JoinColumn(name = "wishlist_id"),
+            inverseJoinColumns = @JoinColumn(name = "apartment_id")
+    )
+    private List<Apartment> apartments;
+
+    public Wishlist() {
+    }
+
+    public Wishlist(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
     }
 
-    public User getTenant() {
-        return tenant;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Apartment getApartment() {
-        return apartment;
+    public User getUser() {
+        return user;
     }
 
-    public void setApartment(Apartment apartment) {
-        this.apartment = apartment;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Apartment> getApartments() {
+        return apartments;
+    }
+
+    public void setApartments(List<Apartment> apartments) {
+        this.apartments = apartments;
     }
 }
