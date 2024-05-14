@@ -15,12 +15,12 @@
             <h2>Login</h2>
             <form th:action="@{/login}" method="post">
 
-                <label for="email">Email: </label>
+                <label class ="label" for="email">Email: </label>
                 <input type="text" id="email" name="email" placeholder="Email" required autofocus/>
 
-                <label for="password">Password: </label>
+                <label class ="label" for="password">Password: </label>
                 <input type="password" id="password" name="password" placeholder="Password"
-                       required pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}"
+                       required minlength="6" maxlength="10" pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}"
                        title="Password must be between 6 and 10 characters long and contain at least one letter and one number."/>
 
                 <button type="submit">Login</button>

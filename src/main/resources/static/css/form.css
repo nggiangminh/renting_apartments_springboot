@@ -18,12 +18,13 @@
         input[type="email"],
         input[type="password"],
         input[type="text"],
-        input[type="tel"] {
+        input[type="submit"]{
             padding: 10px;
+            margin-left:270px;
             margin-bottom: 15px;
-            border: 1px solid #ddd;
+            border: 2px solid black;
             border-radius: 5px;
-            width: 100%;
+            width: 50%;
             box-sizing: border-box;
         }
         button {
@@ -33,7 +34,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            margin-left:380px;
+            width:30%
+
         }
         button:hover {
             background-color: #4cae4c;
+        }
+
+        label {
+         margin-left:270px;
         }
