@@ -4,92 +4,40 @@
       layout:decorate="_layout.html">
 
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Sign Up - CodeJava</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        .form-control {
-            border-radius: 0.25rem;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border-color: #007bff;
-            border-radius: 0.25rem;
-            padding: 10px 20px;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-        }
-        .form-group label {
-            font-weight: bold;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+
 </head>
 <body>
 <div layout:fragment="content">
-    <div class="container text-center">
-        <div>
-            <h1>User Registration - Sign Up</h1>
-        </div>
-        <form th:action="@{/process_signup}" th:object="${user}"
-              method="post" style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+    <div class="container">
+        <h1>User Registration - Sign Up</h1>
+        <form th:action="@{/process_signup}" th:object="${user}" method="post">
+            <label class ="label" for="email">E-mail:</label>
+            <input type="email" id="email" th:field="*{email}" placeholder="Enter your email" required/>
 
-            <div class="m-3">
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">E-mail: </label>
-                    <div class="col-8">
-                        <input type="email" th:field="*{email}" class="form-control" required />
-                    </div>
-                </div>
+            <label class ="label" for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" placeholder="Enter your password" required
+                   minlength="6" maxlength="10" pattern="(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,10}"
+                   title="Password must be between 6 and 10 characters long and contain at least one letter and one number."/>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">Password: </label>
-                    <div class="col-8">
-                        <input type="password" th:field="*{password}" class="form-control"
-                               required minlength="6" maxlength="10"
-                               pattern="(?=.*\d)(?=.*[a-zA-Z]).{6,10}"
-                               title="Password must be 6-10 characters long and include at least one letter and one number"/>
-                    </div>
-                </div>
+            <label class ="label" for="firstName">First Name:</label>
+            <input type="text" id="firstName" th:field="*{firstName}" placeholder="Enter your first name" required
+                   minlength="2" maxlength="20"/>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">First Name: </label>
-                    <div class="col-8">
-                        <input type="text" th:field="*{firstName}" class="form-control"
-                               required minlength="2" maxlength="20"/>
-                    </div>
-                </div>
+            <label class ="label" for="lastName">Last Name:</label>
+            <input type="text" id="lastName" th:field="*{lastName}" placeholder="Enter your last name" required
+                   minlength="2" maxlength="20"/>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">Last Name: </label>
-                    <div class="col-8">
-                        <input type="text" th:field="*{lastName}" class="form-control"
-                               required minlength="2" maxlength="20" />
-                    </div>
-                </div>
+            <label class ="label" for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Enter your phone number"
+                   pattern="[0-9]{10}" class="form-control"
+                   title="Phonenumber must be contain 10 numbers"/>
 
-                <div class="form-group row">
-                    <label class="col-4 col-form-label">Phone Number: </label>
-                    <div class="col-8">
-                        <input type="tel" th:field="*{phoneNumber}" class="form-control"/>
-                    </div>
-                </div>
+            <button type="submit">Register</button>
 
-                <div>
-                    <button type="submit" class="btn btn-primary">Sign Up</button>
-                </div>
-            </div>
+
         </form>
     </div>
 </div>
