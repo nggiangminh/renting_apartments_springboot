@@ -1,6 +1,23 @@
 
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.wrapper > *:not(.footer) {
+  flex: 1;
+}
+
+.footer {
+  background-color: #24262b;
+  padding: 70px 0;
+  flex-shrink: 0; /* Ngăn footer bị co lại */
+}
+
+
 *{
-  margin-top: 100;
   margin:0;
   padding:0;
   box-sizing: border-box;
@@ -19,7 +36,6 @@ ul{
   list-style: none;
 }
 .footer{
-  background-color: #24262b;
     padding: 70px 0;
 }
 .footer-col{

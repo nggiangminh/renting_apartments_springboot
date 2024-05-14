@@ -1,23 +1,11 @@
-.header{
-    min-height: 200vh;
-    width: 100%;
-    height: 100%;
-    background-repeat:inherit;
-    background-position:top;
-    background-size:auto;
-    position: relative;
 
-  }
   .intro{
     position:static;
     background-image:linear-gradient(rgba(0,0,0, 0.1), rgba(0,0,0, 0.6)), url("E:\Final_SE2\react1\public\images\homepage.png");
     padding-top: 3%;
-    display: flexbox;
 
     text-align: center;
-    text-shadow: #181111;
     color: antiquewhite;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-family: 'DM Serif Display', serif;
 
   }
