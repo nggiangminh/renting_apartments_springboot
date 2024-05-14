@@ -12,7 +12,6 @@ nav img{
 .nav-links-menu{
     height: fit-content;
     text-align: right;
-    display: inline-block;
     padding-bottom: 0px;
 }
 .nav-links-menu ul li{

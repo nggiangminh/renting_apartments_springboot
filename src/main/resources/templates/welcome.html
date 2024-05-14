@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="_layout.html">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
     <title>Welcome to 7Tro</title>
+    <link rel="stylesheet" th:href="@{/css/welcome.css}">
 </head>
 <body>
-<div layout:fragment="content">
+
 <div class="container text-center">
     <h1>Welcome to 7Tro</h1>
     <h3><a th:href="@{/signup}">Signup</a></h3>
     <h3><a th:href="@{/login}">Login</a></h3>
 </div>
-</div>
+
 </body>
 </html>

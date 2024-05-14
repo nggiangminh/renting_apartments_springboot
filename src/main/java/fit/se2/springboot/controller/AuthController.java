@@ -20,7 +20,7 @@ public class AuthController {
 
     @GetMapping("")
     public String viewHomePage() {
-        return "Home";
+        return "welcome";
     }
 
     @GetMapping("/signup")
