@@ -24,7 +24,7 @@ public class User {
     @Column(nullable = false, length = 20)
     private String lastName;  // Last name field from the second class
     @Column(nullable = false)
-    private String fullName = firstName + lastName;  // Full name field from the first class
+    private String fullName;  // Full name field from the first class
     private String phoneNumber;
 
     // Getters and setters
@@ -73,8 +73,10 @@ public class User {
         return fullName;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    @PrePersist
+    @PreUpdate
+    private void setFullName() {
+        this.fullName = firstName + " " + lastName;
     }
 
     public String getPhoneNumber() {

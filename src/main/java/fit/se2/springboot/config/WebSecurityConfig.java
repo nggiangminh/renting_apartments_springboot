@@ -42,7 +42,8 @@ public class WebSecurityConfig {
                                 .anyRequest().permitAll()
                 )
                 .formLogin(login ->
-                        login.usernameParameter("email")
+
+                        login.loginPage("/login").usernameParameter("email")
                                 .defaultSuccessUrl("/home")
                                 .permitAll()
                 )

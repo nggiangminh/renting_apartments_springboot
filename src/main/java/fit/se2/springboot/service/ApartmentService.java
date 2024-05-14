@@ -32,6 +32,11 @@ public class ApartmentService {
         }
     }
 
+    // Find apartments by user's ID
+    public List<Apartment> getApartmentsByUserId(Long userId) {
+        return apartmentRepository.findByOwnerId(userId);
+    }
+
     // Save an apartment
     public Apartment saveApartment(Apartment apartment) {
         return apartmentRepository.save(apartment);

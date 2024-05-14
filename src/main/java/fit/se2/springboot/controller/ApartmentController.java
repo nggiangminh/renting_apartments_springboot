@@ -4,6 +4,7 @@ import fit.se2.springboot.model.Apartment;
 import fit.se2.springboot.model.CustomUserDetails;
 import fit.se2.springboot.model.User;
 import fit.se2.springboot.service.ApartmentService;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.security.core.Authentication;
@@ -43,8 +44,11 @@ public class ApartmentController {
     // Display form to add a new apartment
     @GetMapping("/add")
     public String newApartmentForm(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getName()))
+            return "redirect:/login";
         model.addAttribute("apartment", new Apartment());
-        return "apartmentAdd";  // add-apartment-form.html
+        return "apartmentAdd";
     }
 
     // Process the form to add a new apartment
@@ -65,7 +69,7 @@ public class ApartmentController {
         // Save the apartment with the owner ID
         apartmentService.saveApartment(apartment);
 
-        return "redirect:/apartment/";
+        return "redirect:/apartment";
     }
 
     // Update an existing apartment
@@ -75,15 +79,36 @@ public class ApartmentController {
         if (apartment == null) {
             return "redirect:/apartment/";
         }
+
+        // Check if current user is the owner of the apartment
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Long currentUserId = ((CustomUserDetails) userDetails).getId(); // Your UserDetails should have a method to get the user ID
+
+        if (!apartment.getOwner().getId().equals(currentUserId)) {
+            return "redirect:/apartment/"; // Redirect them away if they're not the owner
+        }
+
         model.addAttribute("apartment", apartment);
         return "apartmentUpdate";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/save/{id}")
     public String updateApartment(@PathVariable Long id, @Valid @ModelAttribute Apartment apartment, BindingResult result) {
         if (result.hasErrors()) {
             return "apartmentUpdate";
         }
+
+        // Additional security check to ensure the logged-in user is the owner
+        Apartment existingApartment = apartmentService.getApartmentById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Long currentUserId = ((CustomUserDetails) userDetails).getId();
+
+        if (!existingApartment.getOwner().getId().equals(currentUserId)) {
+            return "redirect:/apartment/"; // Redirect if not the owner
+        }
+
         apartmentService.updateApartment(id, apartment);
         return "redirect:/apartment/" + id;
     }
@@ -91,7 +116,22 @@ public class ApartmentController {
     // Delete an apartment
     @GetMapping("/delete/{id}")
     public String deleteApartment(@PathVariable Long id) {
+        Apartment apartment = apartmentService.getApartmentById(id);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        Long currentUserId = ((CustomUserDetails) userDetails).getId();
+
+        if (!apartment.getOwner().getId().equals(currentUserId)) {
+            return "redirect:/apartment"; // Redirect if not the owner
+        }
+
         apartmentService.deleteApartment(id);
-        return "redirect:/apartment/";
+        return "redirect:/apartment";
+    }
+    @GetMapping("/detail/{id}")
+    public String showApartmentDetails(@PathVariable Long id, Model model) {
+        Apartment apartment = apartmentService.getApartmentById(id);
+        model.addAttribute("apartment", apartment);
+        return "apartmentDetail";
     }
 }
