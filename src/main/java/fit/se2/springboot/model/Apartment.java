@@ -20,7 +20,7 @@ public class Apartment {
     private User owner;
 
     @Column(nullable = false)
-    public boolean isAvailable;
+    public boolean isAvailable = true;
 
     @Column(nullable = false)
     private String title;
@@ -136,5 +136,9 @@ public class Apartment {
 
     public User getOwner() {
         return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

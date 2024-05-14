@@ -1,9 +1,13 @@
 package fit.se2.springboot.controller;
 
 import fit.se2.springboot.model.Apartment;
+import fit.se2.springboot.model.CustomUserDetails;
+import fit.se2.springboot.model.User;
 import fit.se2.springboot.service.ApartmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,7 +53,18 @@ public class ApartmentController {
         if (result.hasErrors()) {
             return "apartmentAdd";
         }
+
+        // Fetch the current user's ID from the authentication object
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        User currentUser = userDetails.getUser();
+
+        // Set the current user's ID as the owner ID of the apartment
+        apartment.setOwner(currentUser);
+
+        // Save the apartment with the owner ID
         apartmentService.saveApartment(apartment);
+
         return "redirect:/apartment/";
     }
 
