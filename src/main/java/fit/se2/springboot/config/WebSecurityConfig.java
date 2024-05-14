@@ -43,7 +43,7 @@ public class WebSecurityConfig {
                 )
                 .formLogin(login ->
                         login.usernameParameter("email")
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/home")
                                 .permitAll()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll()
