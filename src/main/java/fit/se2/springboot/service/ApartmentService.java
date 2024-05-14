@@ -41,7 +41,7 @@ public class ApartmentService {
     public Apartment updateApartment(Long id, Apartment apartmentDetails) {
         Apartment apartment = getApartmentById(id);
         apartment.setTitle(apartmentDetails.getTitle());
-        apartment.setStatus(apartmentDetails.getStatus());
+        apartment.setAvailable(apartmentDetails.isAvailable());
         apartment.setArea(apartmentDetails.getArea());
         apartment.setPrice(apartmentDetails.getPrice());
         apartment.setAddress(apartmentDetails.getAddress());
