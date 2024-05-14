@@ -38,12 +38,12 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/").authenticated()
+                        auth.requestMatchers("/users").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .formLogin(login ->
                         login.usernameParameter("email")
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/users")
                                 .permitAll()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll()
