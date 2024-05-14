@@ -20,7 +20,7 @@ public class Apartment {
     private User owner;
 
     @Column(nullable = false)
-    private String status = "AVAILABLE";
+    public boolean isAvailable;
 
     @Column(nullable = false)
     private String title;
@@ -53,15 +53,13 @@ public class Apartment {
 
     // Getters and Setters
 
-    @Length(min = 3, max = 30)
-    private String name;
 
-    public String getStatus() {
-        return status;
+    public boolean isAvailable() {
+        return isAvailable;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAvailable(boolean available) {
+        isAvailable = available;
     }
 
     public String getTitle() {
@@ -128,12 +126,8 @@ public class Apartment {
         this.lastUpdate = lastUpdate;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
