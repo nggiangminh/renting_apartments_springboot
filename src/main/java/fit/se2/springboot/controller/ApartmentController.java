@@ -47,7 +47,7 @@ public class ApartmentController {
     @PostMapping("/insert")
     public String addApartment(@Valid @ModelAttribute Apartment apartment, BindingResult result) {
         if (result.hasErrors()) {
-            return "apartmentAdd";
+            return "apartmentList";
         }
         apartmentService.saveApartment(apartment);
         return "redirect:/apartment/";

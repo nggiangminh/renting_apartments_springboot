@@ -21,7 +21,7 @@ public class UserController {
     @GetMapping("/")
     public String listUsers(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "users";  // HTML page name in src/main/resources/templates
+        return "users";
     }
 
     // Display one user by ID
@@ -29,21 +29,21 @@ public class UserController {
     public String getUserById(@PathVariable Long id, Model model) {
         User user = userService.getUserById(id);
         model.addAttribute("user", user);
-        return "user-profile";  // user-profile.html
+        return "user-profile";
     }
 
     // Display the form for adding a new user
     @GetMapping("/new")
     public String newUserForm(Model model) {
         model.addAttribute("user", new User());
-        return "add-user-form";  // add-user-form.html
+        return "add-user-form";
     }
 
     // Process the form for adding a new user
     @PostMapping("/")
     public String addUser(@ModelAttribute User user) {
         userService.saveUser(user);
-        return "redirect:/users/";  // Redirect to list all users
+        return "redirect:/users/";
     }
 }
 

@@ -19,7 +19,7 @@ public class Apartment {
 //    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public boolean isAvailable;
 
     @Column(nullable = false)
