@@ -13,10 +13,10 @@
     <form method="post" th:action="'/apartment/save'">
         <input type="hidden" th:field="${apartment.id}"/>
         <div class="control-group">
-            <label>apartment name:</label>
-            <input type="text" th:field="${apartment.name}"/>
-            <div th:if="${#fields.hasErrors('apartment.name')}"
-                 th:errorclass="error" th:errors="${apartment.name}"/>
+            <label>Apartment Title:</label>
+            <input type="text" th:field="${apartment.title}"/>
+            <div th:if="${#fields.hasErrors('apartment.title')}"
+                 th:errorclass="error" th:errors="${apartment.title}"/>
         </div>
         <div class="control-group">
             <label>apartment price:</label>
@@ -33,12 +33,20 @@
             </label>
         </div>
         <div class="control-group">
+            <label>Apartment area:
+                <input type="number" th:field="${apartment.area}"/>
+                <div th:if="${#fields.hasErrors('apartment.area')}"
+                     th:errorclass="error" th:errors="${apartment.area}"/>
+            </label>
+        </div>
+        <div class="control-group">
             <label>apartment address:
                 <input type="text" th:field="${apartment.address}"/>
                 <div th:if="${#fields.hasErrors('apartment.address')}"
                      th:errorclass="error" th:errors="${apartment.address}"/>
             </label>
         </div>
+
         <div class="control-group">
             <button type="submit">UPDATE</button>
         </div>

@@ -15,11 +15,12 @@
 
         <div>ID: <span th:text="${apartment.id}"></span></div>
 
-        <a th:href="'apartment/detail/' + ${apartment.id}" th:text="${apartment.name}"/>
+        <a th:href="'apartment/detail/' + ${apartment.id}" th:text="${apartment.title}"/>
 
-        <div>Name: <span th:text="${apartment.name}"></span></div>
+        <div>Name: <span th:text="${apartment.title}"></span></div>
         <div>Price: <span th:text="${apartment.price}"></span></div>
         <div>Address: <span th:text="${apartment.address}"></span></div>
+        <div>Address: <span th:text="${apartment.area}"></span></div>
         <div>
             <img th:src="${apartment.image}" alt="Apartment Image"/>
         </div>

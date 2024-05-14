@@ -19,8 +19,8 @@ public class Apartment {
 //    @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
 
-    @Column(nullable = false)
-    private boolean isAvailable = true;
+//    @Column(nullable = false)
+//    private boolean isAvailable = true;
 
 
     @Column(nullable = false)
@@ -57,13 +57,13 @@ public class Apartment {
     @Length(min = 3, max = 30)
     private String name;
 
-    public boolean isAvailable() {
-        return isAvailable;
-    }
-
-    public void setAvailable(boolean isAvailable) {
-        this.isAvailable = isAvailable;
-    }
+//    public boolean isAvailable() {
+//        return isAvailable;
+//    }
+//
+//    public void setAvailable(boolean isAvailable) {
+//        this.isAvailable = isAvailable;
+//    }
 
     public String getTitle() {
         return title;

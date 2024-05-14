@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/style.css}">
-    <title>Add apartment</title>
+    <title>Add Apartment</title>
 </head>
 <body>
 <div layout:fragment="content">
@@ -13,28 +13,35 @@
     <h2>ADD Apartment</h2>
     <form th:action="'/apartment/insert'" th:object="${apartment}" method="post">
         <div class="control-group">
-            <label>Apartment name: </label>
-            <input type="text" th:field="*{name}"/>
-            <div th:if="${#fields.hasErrors('name')}"
-                 th:errorclass="error" th:errors="*{name}"/>
+            <label>Apartment Title: </label>
+            <input type="text" th:field="*{title}"/>
+            <div th:if="${#fields.hasErrors('title')}"
+                 th:errorclass="error" th:errors="*{title}"/>
         </div>
         <div class="control-group">
-            <label>Apartment price: </label>
+            <label>Apartment Price: </label>
             <input type="number" th:field="*{price}"/>
             <div th:if="${#fields.hasErrors('price')}"
                  th:errorclass="error" th:errors="*{price}"/>
         </div>
         <div class="control-group">
-            <label>Apartment image: </label>
+            <label>Apartment Image: </label>
             <input type="text" th:field="*{image}"/>
             <div th:if="${#fields.hasErrors('image')}"
                  th:errorclass="error" th:errors="*{image}"/>
         </div>
         <div class="control-group">
-            <label>Apartment address: </label>
+            <label>Apartment Address: </label>
             <input type="text" th:field="*{address}"/>
             <div th:if="${#fields.hasErrors('address')}"
                  th:errorclass="error" th:errors="*{address}"/>
+        </div>
+        <div class="control-group">
+            <label>Apartment area:
+                <input type="number" th:field="*{area}"/>
+                <div th:if="${#fields.hasErrors('area')}"
+                     th:errorclass="error" th:errors="*{area}"/>
+            </label>
         </div>
         <div class="control-group">
             <button type="submit">ADD</button>
