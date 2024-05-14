@@ -53,9 +53,6 @@ public class Apartment {
 
     // Getters and Setters
 
-    @Length(min = 3, max = 30)
-    private String name;
-
     public String getStatus() {
         return status;
     }
@@ -126,14 +123,6 @@ public class Apartment {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Long getId() {
