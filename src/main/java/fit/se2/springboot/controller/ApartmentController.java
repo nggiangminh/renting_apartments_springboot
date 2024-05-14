@@ -67,7 +67,7 @@ public class ApartmentController {
     @PostMapping("/save")
     public String updateApartment(@PathVariable Long id, @Valid @ModelAttribute Apartment apartment, BindingResult result) {
         if (result.hasErrors()) {
-            return "apartmentUpdate";
+            return "apartmentList";
         }
         apartmentService.updateApartment(id, apartment);
         return "redirect:/apartment/" + id;
