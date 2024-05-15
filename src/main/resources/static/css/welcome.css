@@ -1,34 +1,36 @@
+/* welcome.css */
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        h3 {
-            margin: 1rem 0;
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: color 0.3s ease;
-        }
-        a:hover {
-            color: #0056b3;
-        }
+/* Style cho container */
+.container {
+    margin-top: 50px; /* Khoảng cách từ trên xuống */
+}
+
+/* Style cho tiêu đề h1 */
+h1 {
+    color: #333; /* Màu chữ */
+    font-size: 72px; /* Kích thước chữ */
+    font-weight: bold; /* Chữ in đậm */
+}
+
+/* Style cho tiêu đề h3 */
+h3 {
+    margin-top: 20px; /* Khoảng cách từ trên xuống */
+}
+
+/* Style cho khung chứa heading h3 */
+.rectangle {
+    border-radius: 20px; /* Bo cong viền */
+    padding: 10px; /* Khoảng cách bên trong khung */
+    background-color: #fff7d6; /* Màu nền */
+}
+
+/* Style cho các liên kết */
+a {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: #007bff; /* Màu chữ */
+}
+
+/* Style khi di chuột qua liên kết */
+a:hover {
+    text-decoration: underline; /* Gạch chân khi di chuột qua */
+}

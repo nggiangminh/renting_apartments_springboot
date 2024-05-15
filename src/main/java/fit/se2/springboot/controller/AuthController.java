@@ -26,7 +26,7 @@ public class AuthController {
 
     @GetMapping("")
     public String viewHomePage() {
-        return "welcome";
+        return "account";
     }
 
     @GetMapping("/signup")
