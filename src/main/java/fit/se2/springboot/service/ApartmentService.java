@@ -16,7 +16,37 @@ public class ApartmentService {
     public ApartmentService(ApartmentRepository apartmentRepository) {
         this.apartmentRepository = apartmentRepository;
     }
+    public List<Apartment> findAllExcludingUserOrderByPriceAsc(Long userId) {
+        return apartmentRepository.findAllByOwnerIdNotOrderByPriceAsc(userId);
+    }
 
+    public List<Apartment> findAllExcludingUserOrderByPriceDesc(Long userId) {
+        return apartmentRepository.findAllByOwnerIdNotOrderByPriceDesc(userId);
+    }
+
+    public List<Apartment> findAllExcludingUserOrderByAreaAsc(Long userId) {
+        return apartmentRepository.findAllByOwnerIdNotOrderByAreaAsc(userId);
+    }
+
+    public List<Apartment> findAllExcludingUserOrderByAreaDesc(Long userId) {
+        return apartmentRepository.findAllByOwnerIdNotOrderByAreaDesc(userId);
+    }
+
+    public List<Apartment> findAllOrderByPriceAsc() {
+        return apartmentRepository.findAllByOrderByPriceAsc();
+    }
+
+    public List<Apartment> findAllOrderByPriceDesc() {
+        return apartmentRepository.findAllByOrderByPriceDesc();
+    }
+
+    public List<Apartment> findAllOrderByAreaAsc() {
+        return apartmentRepository.findAllByOrderByAreaAsc();
+    }
+
+    public List<Apartment> findAllOrderByAreaDesc() {
+        return apartmentRepository.findAllByOrderByAreaDesc();
+    }
     // Find all apartments
     public List<Apartment> findAll() {
         return apartmentRepository.findAll();

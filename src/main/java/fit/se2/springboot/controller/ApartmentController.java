@@ -29,21 +29,45 @@ public class ApartmentController {
 
     // List all apartments
     @GetMapping("")
-    public String listApartments(Model model) {
+    public String listApartments(@RequestParam(value = "sort", required = false) String sort, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        List<Apartment> apartments;
 
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             Long currentUserId = ((CustomUserDetails) authentication.getPrincipal()).getId();
-            List<Apartment> apartments = apartmentService.findAllExcludingUser(currentUserId);
-            model.addAttribute("apartments", apartments);
+            switch (sort) {
+                case "price_desc":
+                    apartments = apartmentService.findAllExcludingUserOrderByPriceDesc(currentUserId);
+                    break;
+                case "area_asc":
+                    apartments = apartmentService.findAllExcludingUserOrderByAreaAsc(currentUserId);
+                    break;
+                case "area_desc":
+                    apartments = apartmentService.findAllExcludingUserOrderByAreaDesc(currentUserId);
+                    break;
+                default:
+                    apartments = apartmentService.findAllExcludingUserOrderByPriceAsc(currentUserId);
+            }
         } else {
-            List<Apartment> apartments = apartmentService.findAll();
-            model.addAttribute("apartments", apartments);
+            switch (sort) {
+                case "price_desc":
+                    apartments = apartmentService.findAllOrderByPriceDesc();
+                    break;
+                case "area_asc":
+                    apartments = apartmentService.findAllOrderByAreaAsc();
+                    break;
+                case "area_desc":
+                    apartments = apartmentService.findAllOrderByAreaDesc();
+                    break;
+                default:
+                    apartments = apartmentService.findAllOrderByPriceAsc();
+            }
         }
 
+        model.addAttribute("apartments", apartments);
+        model.addAttribute("sort", sort);
         return "apartmentList";  // View that lists all apartments
     }
-
     @GetMapping("/my")
     public String getmyApartments(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,6 +78,7 @@ public class ApartmentController {
         model.addAttribute("apartments", apartments);
         return "myApartment";
     }
+
     @GetMapping("/my/{id}")
     public String getmyApartmentById(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
