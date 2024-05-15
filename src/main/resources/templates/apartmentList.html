@@ -10,12 +10,11 @@
 <body>
 <div layout:fragment="content">
 <div>
-    <div class="title"> <a th:href="'/apartment/add'" >  ADD APARTMENT </a> </div>
     <div th:each="apartment : ${apartments}" class="apartment-card">
 
         <div>ID: <span th:text="${apartment.id}"></span></div>
 
-        <a th:href="'apartment/detail/' + ${apartment.id}" th:text="${apartment.title}"/>
+        <a th:href="'apartment/' + ${apartment.id}" th:text="${apartment.title}"/>
 
         <div>Name: <span th:text="${apartment.title}"></span></div>
         <div>Price: <span th:text="${apartment.price}"></span></div>
@@ -24,11 +23,6 @@
         <div>
             <img th:src="${apartment.image}" alt="Apartment Image"/>
         </div>
-        <div>
-            <a th:href="'/apartment/update/' + ${apartment.id}">UPDATE</a>
-            <a th:href="'/apartment/delete/' + ${apartment.id}">DELETE</a>
-        </div>
-
     </div>
 </div>
 </div>

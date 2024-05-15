@@ -51,6 +51,7 @@ public class WebSecurityConfig {
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/").permitAll()
                 );
+        http.csrf(CsrfConfigurer::disable);
 
         return http.build();
     }

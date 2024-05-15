@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -28,17 +30,60 @@ public class ApartmentController {
     // List all apartments
     @GetMapping("")
     public String listApartments(Model model) {
-        List<Apartment> apartments = apartmentService.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
+            Long currentUserId = ((CustomUserDetails) authentication.getPrincipal()).getId();
+            List<Apartment> apartments = apartmentService.findAllExcludingUser(currentUserId);
+            model.addAttribute("apartments", apartments);
+        } else {
+            List<Apartment> apartments = apartmentService.findAll();
+            model.addAttribute("apartments", apartments);
+        }
+
+        return "apartmentList";  // View that lists all apartments
+    }
+
+    @GetMapping("/my")
+    public String getmyApartments(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getName()))
+            return "redirect:/login";
+        Long userId = ((CustomUserDetails) authentication.getPrincipal()).getId(); // Fetch the current user's ID
+        List<Apartment> apartments = apartmentService.getApartmentsByUserId(userId);
         model.addAttribute("apartments", apartments);
-        return "apartmentList";
+        return "myApartment";
+    }
+    @GetMapping("/my/{id}")
+    public String getmyApartmentById(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated() || "anonymousUser".equals(authentication.getName()))
+            return "redirect:/login";
+        Long userId = ((CustomUserDetails) authentication.getPrincipal()).getId(); // Fetch the current user's ID
+        Apartment apartment = apartmentService.getApartmentById(id);
+        if (apartment == null) {
+            redirectAttributes.addFlashAttribute("error", "Apartment not found.");
+            return "redirect:/apartment/my";
+        }
+
+        if (!userId.equals(apartment.getOwner().getId())) {
+            redirectAttributes.addFlashAttribute("error", "You are not the owner of this apartment.");
+            return "redirect:/apartment/list";  // Redirect to a safe and general page
+        }
+        model.addAttribute("apartment", apartment);
+        return "myApartmentDetail";  // apartment-details.html
     }
 
     // Display one apartment by ID
     @GetMapping("/{id}")
-    public String getApartmentById(@PathVariable Long id, Model model) {
+    public String getApartmentById(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Apartment apartment = apartmentService.getApartmentById(id);
+        if (apartment == null) {
+            redirectAttributes.addFlashAttribute("error", "Apartment not found.");
+            return "redirect:/apartment";
+        }
         model.addAttribute("apartment", apartment);
-        return "apartmentDetails";  // apartment-details.html
+        return "apartmentDetail";  // apartment-details.html
     }
 
     // Display form to add a new apartment
@@ -69,15 +114,16 @@ public class ApartmentController {
         // Save the apartment with the owner ID
         apartmentService.saveApartment(apartment);
 
-        return "redirect:/apartment";
+        return "redirect:/apartment/my";
     }
 
     // Update an existing apartment
     @GetMapping("/update/{id}")
-    public String showUpdateForm(@PathVariable Long id, Model model) {
+    public String showUpdateForm(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
         Apartment apartment = apartmentService.getApartmentById(id);
         if (apartment == null) {
-            return "redirect:/apartment/";
+            redirectAttributes.addFlashAttribute("error", "Apartment not found.");
+            return "redirect:/apartment/my";
         }
 
         // Check if current user is the owner of the apartment
@@ -86,7 +132,8 @@ public class ApartmentController {
         Long currentUserId = ((CustomUserDetails) userDetails).getId(); // Your UserDetails should have a method to get the user ID
 
         if (!apartment.getOwner().getId().equals(currentUserId)) {
-            return "redirect:/apartment/"; // Redirect them away if they're not the owner
+            redirectAttributes.addFlashAttribute("error", "You are not the owner of this apartment.");
+            return "redirect:/apartment"; // Redirect them away if they're not the owner
         }
 
         model.addAttribute("apartment", apartment);
@@ -98,40 +145,28 @@ public class ApartmentController {
         if (result.hasErrors()) {
             return "apartmentUpdate";
         }
-
-        // Additional security check to ensure the logged-in user is the owner
-        Apartment existingApartment = apartmentService.getApartmentById(id);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Long currentUserId = ((CustomUserDetails) userDetails).getId();
-
-        if (!existingApartment.getOwner().getId().equals(currentUserId)) {
-            return "redirect:/apartment/"; // Redirect if not the owner
-        }
-
         apartmentService.updateApartment(id, apartment);
-        return "redirect:/apartment/" + id;
+        return "redirect:/apartment/my/" + id;
     }
 
     // Delete an apartment
     @GetMapping("/delete/{id}")
-    public String deleteApartment(@PathVariable Long id) {
+    public String deleteApartment(@PathVariable Long id, RedirectAttributes redirectAttributes) {
         Apartment apartment = apartmentService.getApartmentById(id);
+        if (apartment == null) {
+            redirectAttributes.addFlashAttribute("error", "Apartment not found.");
+            return "redirect:/apartment/my";
+        }
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Long currentUserId = ((CustomUserDetails) userDetails).getId();
 
         if (!apartment.getOwner().getId().equals(currentUserId)) {
-            return "redirect:/apartment"; // Redirect if not the owner
+            redirectAttributes.addFlashAttribute("error", "You are not the owner of this apartment.");
+            return "redirect:/apartment"; // Redirect them away if they're not the owner
         }
 
         apartmentService.deleteApartment(id);
-        return "redirect:/apartment";
-    }
-    @GetMapping("/detail/{id}")
-    public String showApartmentDetails(@PathVariable Long id, Model model) {
-        Apartment apartment = apartmentService.getApartmentById(id);
-        model.addAttribute("apartment", apartment);
-        return "apartmentDetail";
+        return "redirect:/apartment/my";
     }
 }
