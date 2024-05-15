@@ -26,8 +26,14 @@ public class AuthController {
 
     @GetMapping("")
     public String viewHomePage() {
+        return "Home";
+    }
+    @GetMapping("/account")
+    public String Account() {
         return "account";
     }
+
+
 
     @GetMapping("/signup")
     public String showRegistrationForm(Model model) {

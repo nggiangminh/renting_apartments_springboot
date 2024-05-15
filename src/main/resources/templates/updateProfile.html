@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
 <head>
     <meta charset="UTF-8">
     <title>Update Profile</title>
@@ -8,10 +10,9 @@
             font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
             margin: 0;
-            padding: 20px;
+
         }
         .container {
-            background: white;
             max-width: 500px;
             margin: 50px auto;
             padding: 20px;
@@ -34,7 +35,7 @@
             border: 2px solid #ccc;
             border-radius: 4px;
         }
-        button {
+        .savechanges {
             background-color: #5c67f2;
             color: white;
             padding: 10px 20px;
@@ -43,10 +44,10 @@
             cursor: pointer;
             width: 100%;
         }
-        button:hover {
+        .savechanges:hover {
             background-color: #5058e2;
         }
-        a {
+        .cancel {
             display: block;
             text-align: center;
             margin-top: 20px;
@@ -59,6 +60,7 @@
     </style>
 </head>
 <body>
+<div layout:fragment="content">
 <div class="container">
     <h1>Update My Profile</h1>
     <form th:action="@{/update_my_profile}" th:object="${user}" method="post">
@@ -71,10 +73,11 @@
             <input type="text" id="lastName" th:field="*{lastName}" required />
         </div>
         <div>
-            <button type="submit">Save Changes</button>
+            <button class ="savechanges"type="submit">Save Changes</button>
         </div>
     </form>
-    <a th:href="@{/my_profile}">Cancel</a>
+    <a class="cancel"th:href="@{/my_profile}">Cancel</a>
+</div>
 </div>
 </body>
 </html>

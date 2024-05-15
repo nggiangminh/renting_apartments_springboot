@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/css/apartmentList.css}">
     <title>My Profile</title>
     <style>
-    a {
+    .ae {
     display: inline-block;
     padding: 10px 20px;
     margin: 10px 5px;
@@ -15,12 +17,13 @@
     border-radius: 5px;
     }
 
-    a:hover {
+    .ae:hover {
     background-color: #0056b3;
     }
     </style>
 </head>
 <body>
+<div layout:fragment="content">
 <h1 class="title">My Profile</h1>
 <div>
     <p class="title">Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
@@ -39,8 +42,9 @@
     </div>
 </div>
 <div class="butt">
-    <a th:href="@{/edit_my_profile}">Edit Profile</a>
-    <a th:href="@{/change_password}">Change Password</a>
+    <a class="ae"th:href="@{/edit_my_profile}">Edit Profile</a>
+    <a class="ae"th:href="@{/change_password}">Change Password</a>
+</div>
 </div>
 </body>
 </html>

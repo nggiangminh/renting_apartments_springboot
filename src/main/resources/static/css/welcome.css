@@ -1,36 +1,44 @@
-/* welcome.css */
 
-/* Style cho container */
-.container {
-    margin-top: 50px; /* Khoảng cách từ trên xuống */
-}
 
-/* Style cho tiêu đề h1 */
+
 h1 {
-    color: #333; /* Màu chữ */
-    font-size: 72px; /* Kích thước chữ */
-    font-weight: bold; /* Chữ in đậm */
+    color: #333;
+    font-size: 70px;
+    font-weight: bold;
+    text-align:center
 }
 
-/* Style cho tiêu đề h3 */
 h3 {
-    margin-top: 20px; /* Khoảng cách từ trên xuống */
+    margin-top: 20px;
+    padding :10px
 }
 
-/* Style cho khung chứa heading h3 */
-.rectangle {
-    border-radius: 20px; /* Bo cong viền */
-    padding: 10px; /* Khoảng cách bên trong khung */
-    background-color: #fff7d6; /* Màu nền */
-}
-
-/* Style cho các liên kết */
 a {
-    text-decoration: none; /* Loại bỏ gạch chân */
-    color: #007bff; /* Màu chữ */
+    text-decoration: none;
+    color: #007bff;
 }
 
-/* Style khi di chuột qua liên kết */
-a:hover {
-    text-decoration: underline; /* Gạch chân khi di chuột qua */
+    a:hover {
+    text-decoration: underline;
+}
+
+    .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #5cb85c;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding:10px
+}
+    .button:hover {
+    background-color: #4cae4c;
+}
+
+.rectangle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
