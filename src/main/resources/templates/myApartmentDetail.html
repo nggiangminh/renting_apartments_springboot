@@ -37,9 +37,10 @@
             <h2 th:text="${apartment.title}"/>
             <p th:text="'Price: ' + ${apartment.price}"/>
             <p th:text="'Address: ' + ${apartment.address}"/>
-            <button id="wishlist-button" th:data-apartment-id="${apartment.id}">
-                Add to Wishlist
-            </button>
+        </div>
+        <div>
+            <a th:href="'/apartment/update/' + ${apartment.id}">UPDATE</a>
+            <a th:href="'/apartment/delete/' + ${apartment.id}">DELETE</a>
         </div>
     </div>
 </div>

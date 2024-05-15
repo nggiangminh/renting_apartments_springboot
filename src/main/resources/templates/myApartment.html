@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>My Apartments</title>
+    <link rel="stylesheet" th:href="@{/css/apartmentList.css}">
+</head>
+<body>
+<div layout:fragment="content">
+    <div>
+        <div class="title"> <a th:href="'/apartment/add'" >  ADD APARTMENT </a> </div>
+        <div th:each="apartment : ${apartments}" class="apartment-card">
+
+            <div>ID: <span th:text="${apartment.id}"></span></div>
+
+            <a th:href="'my/' + ${apartment.id}" th:text="${apartment.title}"/>
+
+            <div>Name: <span th:text="${apartment.title}"></span></div>
+            <div>Price: <span th:text="${apartment.price}"></span></div>
+            <div>Address: <span th:text="${apartment.address}"></span></div>
+            <div>Area: <span th:text="${apartment.area}"></span></div>
+            <div>
+                <img th:src="${apartment.image}" alt="Apartment Image"/>
+            </div>
+            <div>
+                <a th:href="'/apartment/update/' + ${apartment.id}">UPDATE</a>
+                <a th:href="'/apartment/delete/' + ${apartment.id}">DELETE</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

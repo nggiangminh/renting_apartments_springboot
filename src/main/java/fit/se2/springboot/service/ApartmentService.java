@@ -22,6 +22,11 @@ public class ApartmentService {
         return apartmentRepository.findAll();
     }
 
+    // Find all excluding current user's apartments
+    public List<Apartment> findAllExcludingUser(Long userId) {
+        // Exclude apartments based on the owner's ID
+        return apartmentRepository.findAllByOwnerIdNot(userId);
+    }
     // Find an apartment by ID
     public Apartment getApartmentById(Long id) {
         Optional<Apartment> apartment = apartmentRepository.findById(id);

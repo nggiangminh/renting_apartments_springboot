@@ -10,5 +10,8 @@ import java.util.List;
 public interface ApartmentRepository extends JpaRepository<Apartment, Long> {
     // Find all apartments by user ID
     List<Apartment> findByOwnerId(Long ownerId);
+
+    // Find all except apartments by user ID
+    List<Apartment> findAllByOwnerIdNot(Long ownerId);
 }
 
