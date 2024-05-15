@@ -20,3 +20,11 @@
             height: 100px;
             border-radius: 5px; /* Bo cong các góc của hình ảnh */
         }
+
+        .title {
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .butt {
+         margin-left:800px}

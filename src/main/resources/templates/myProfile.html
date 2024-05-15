@@ -2,28 +2,45 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/apartmentList.css}">
     <title>My Profile</title>
+    <style>
+        a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+a:hover {
+    background-color: #0056b3;
+}
+    </style>
 </head>
 <body>
-<h1>My Profile</h1>
+<h1 class="title">My Profile</h1>
 <div>
-    <p>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
-    <p>Email: <span th:text="${user.email}"></span></p>
-    <!-- Additional fields as necessary -->
+    <p class="title">Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+    <p class="title">Email: <span th:text="${user.email}"></span></p>
 </div>
 
 <div>
-    <h2>Your Apartments</h2>
-    <ul>
-        <li th:each="apartment : ${apartments}">
+    <h1 class="title">Your Apartments</h1>
+    <div>
+        <div th:each="apartment : ${apartments}" class="apartment-card">
             <p><span th:text="${apartment.title}"></span></p>
             <p>Price: <span th:text="${apartment.price}"></span></p>
             <p>Address: <span th:text="${apartment.address}"></span></p>
             <p>Area: <span th:text="${apartment.area}"></span></p>
-            <!-- Additional apartment details -->
-        </li>
-    </ul>
+        </div>
+    </div>
 </div>
-<a th:href="@{/edit_my_profile}">Edit Profile</a>
+<div class="butt">
+    <a th:href="@{/edit_my_profile}">Edit Profile</a>
+    <a th:href="@{/change_password}">Change Password</a>
+</div>
 </body>
 </html>

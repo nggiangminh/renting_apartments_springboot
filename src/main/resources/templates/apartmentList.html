@@ -10,7 +10,7 @@
 <body>
 <div layout:fragment="content">
 <div>
-    <div> <a th:href="'/apartment/add'" >  Add apartment </a> </div>
+    <div class="title"> <a th:href="'/apartment/add'" >  ADD APARTMENT </a> </div>
     <div th:each="apartment : ${apartments}" class="apartment-card">
 
         <div>ID: <span th:text="${apartment.id}"></span></div>

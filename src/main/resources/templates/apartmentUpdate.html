@@ -10,7 +10,7 @@
 <body>
 <div layout:fragment="content">
     <div class="container">
-        <h2>UPDATE apartment</h2>
+        <h1>UPDATE apartment</h1>
         <form method="post" th:action="'/apartment/save'">
             <input type="hidden" th:field="${apartment.id}"/>
 
@@ -21,19 +21,18 @@
 
 
             <label class="label">Price:</label>
-            <input type="number" th:field="${apartment.price}"/>
+            <input type="text" th:field="${apartment.price}"/>
             <div th:if="${#fields.hasErrors('apartment.price')}"
                  th:errorclass="error" th:errors="${apartment.price}"/>
 
             <label class="label"> Image:</label>
-            <img th:src="${apartment.image}" width="100" height="100"/>
             <input type="text" th:field="${apartment.image}"/>
             <div th:if="${#fields.hasErrors('apartment.image')}"
                  th:errorclass="error" th:errors="${apartment.image}"/>
 
 
             <label class="label">Area</label>
-            <input type="number" th:field="${apartment.area}"/>
+            <input type="text" th:field="${apartment.area}"/>
             <div th:if="${#fields.hasErrors('apartment.area')}"
                  th:errorclass="error" th:errors="${apartment.area}"/>
 
