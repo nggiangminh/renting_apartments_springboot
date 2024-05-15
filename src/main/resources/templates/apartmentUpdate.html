@@ -4,53 +4,49 @@
       layout:decorate="_layout">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/form.css}">
     <title>Edit Apartment</title>
 </head>
 <body>
 <div layout:fragment="content">
-    <h2>UPDATE apartment</h2>
-    <form method="post" th:action="'/apartment/save'">
-        <input type="hidden" th:field="${apartment.id}"/>
-        <div class="control-group">
-            <label>Apartment Title:</label>
+    <div class="container">
+        <h2>UPDATE apartment</h2>
+        <form method="post" th:action="'/apartment/save'">
+            <input type="hidden" th:field="${apartment.id}"/>
+
+            <label class="label"> Title:</label>
             <input type="text" th:field="${apartment.title}"/>
             <div th:if="${#fields.hasErrors('apartment.title')}"
                  th:errorclass="error" th:errors="${apartment.title}"/>
-        </div>
-        <div class="control-group">
-            <label>apartment price:</label>
+
+
+            <label class="label">Price:</label>
             <input type="number" th:field="${apartment.price}"/>
             <div th:if="${#fields.hasErrors('apartment.price')}"
                  th:errorclass="error" th:errors="${apartment.price}"/>
-        </div>
-        <div class="control-group">
-            <label>apartment image:<br>
-                <img th:src="${apartment.image}" width="100" height="100"/>
-                <input type="text" th:field="${apartment.image}"/>
-                <div th:if="${#fields.hasErrors('apartment.image')}"
-                     th:errorclass="error" th:errors="${apartment.image}"/>
-            </label>
-        </div>
-        <div class="control-group">
-            <label>Apartment area:
-                <input type="number" th:field="${apartment.area}"/>
-                <div th:if="${#fields.hasErrors('apartment.area')}"
-                     th:errorclass="error" th:errors="${apartment.area}"/>
-            </label>
-        </div>
-        <div class="control-group">
-            <label>apartment address:
-                <input type="text" th:field="${apartment.address}"/>
-                <div th:if="${#fields.hasErrors('apartment.address')}"
-                     th:errorclass="error" th:errors="${apartment.address}"/>
-            </label>
-        </div>
 
-        <div class="control-group">
+            <label class="label"> Image:</label>
+            <img th:src="${apartment.image}" width="100" height="100"/>
+            <input type="text" th:field="${apartment.image}"/>
+            <div th:if="${#fields.hasErrors('apartment.image')}"
+                 th:errorclass="error" th:errors="${apartment.image}"/>
+
+
+            <label class="label">Area</label>
+            <input type="number" th:field="${apartment.area}"/>
+            <div th:if="${#fields.hasErrors('apartment.area')}"
+                 th:errorclass="error" th:errors="${apartment.area}"/>
+
+
+            <label class="label">Address</label>
+            <input type="text" th:field="${apartment.address}"/>
+            <div th:if="${#fields.hasErrors('apartment.address')}"
+                 th:errorclass="error" th:errors="${apartment.address}"/>
+
+
             <button type="submit">UPDATE</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 </body>
 </html>
