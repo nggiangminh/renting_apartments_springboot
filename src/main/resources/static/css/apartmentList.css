@@ -1,5 +1,7 @@
         body {
-        margin: 0;}
+         margin: 0;
+        }
+
         .apartment-card {
             margin : 1%;
             padding : 1%;
@@ -27,5 +29,21 @@
             text-align: center;
         }
 
-        .butt {
-         margin-left:800px}
+         .butt {
+            display: flex;
+            margin-left:800px
+         }
+
+          .ae {
+             padding: 10px 20px;
+             margin: 10px 5px;
+             background-color: #5cb85c;
+             color: white;
+             text-decoration: none;
+             border-radius: 5px;
+          }
+
+          .ae:hover {
+             background-color:#4cae4c;
+          }
+
