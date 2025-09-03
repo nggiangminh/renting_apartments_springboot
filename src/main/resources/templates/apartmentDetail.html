@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Apartment Detail</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#wishlist-button').click(function() {
+                const apartmentId = $(this).data('apartment-id');
+                $.ajax({
+                    type: 'POST',
+                    url: '/wishlist/add/' + apartmentId,
+                    success: function(response) {
+                        alert(response);  // Display success message
+                        $('#wishlist-button').text('Added to Wishlist').prop('disabled', true); // Change button text and disable it
+                    },
+                    error: function(xhr) {
+                        alert('Error adding to wishlist: ' + xhr.responseText);
+                    }
+
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <h1>APARTMENT DETAIL</h1>
+    <div style="display: flex; flex-direction: row;">
+        <div>
+            <img th:src="${apartment.image}" width="210" height="210">
+        </div>
+        <div>
+            <h2 th:text="${apartment.title}"/>
+            <p th:text="'Price: ' + ${apartment.price}"/>
+            <p th:text="'Address: ' + ${apartment.address}"/>
+            <button id="wishlist-button" th:data-apartment-id="${apartment.id}">
+                Add to Wishlist
+            </button>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+</html>

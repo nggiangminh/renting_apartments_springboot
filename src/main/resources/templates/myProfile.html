@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/apartmentList.css}">
+    <title>My Profile</title>
+    <style>
+
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+<h1 class="title">My Profile</h1>
+<div>
+    <p class="title">Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+    <p class="title">Email: <span th:text="${user.email}"></span></p>
+</div>
+
+<div>
+    <h1 class="title">Your Apartments</h1>
+    <div>
+        <div th:each="apartment : ${apartments}" class="apartment-card">
+            <p><span th:text="${apartment.title}"></span></p>
+            <p>Price: <span th:text="${apartment.price}"></span></p>
+            <p>Address: <span th:text="${apartment.address}"></span></p>
+            <p>Area: <span th:text="${apartment.area}"></span></p>
+        </div>
+    </div>
+</div>
+<div class="butt">
+    <a class="ae"th:href="@{/edit_my_profile}">Edit Profile</a>
+    <a class="ae"th:href="@{/change_password}">Change Password</a>
+</div>
+</div>
+</body>
+</html>

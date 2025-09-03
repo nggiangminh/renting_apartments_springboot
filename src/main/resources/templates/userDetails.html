@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+</head>
+<body>
+<h1>User Profile</h1>
+<div>
+    <p>Name: <span th:text="${user.firstName} + ' ' + ${user.lastName}"></span></p>
+    <p>Email: <span th:text="${user.email}"></span></p>
+    <!-- Additional fields as necessary -->
+</div>
+
+<div>
+    <h2> Apartments</h2>
+    <ul>
+        <li th:each="apartment : ${apartments}">
+            <p><span th:text="${apartment.title}"></span></p>
+            <p>Price: <span th:text="${apartment.price}"></span></p>
+            <p>Address: <span th:text="${apartment.address}"></span></p>
+            <p>Area: <span th:text="${apartment.area}"></span></p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

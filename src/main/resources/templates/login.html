@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" th:href="@{/css/form.css}">
+    <script>
+        function togglePassword() {
+         var passwordInput = document.getElementById('password');
+         var passwordType = passwordInput.type === 'password' ? 'text' : 'password';
+         passwordInput.type = passwordType;
+}
+
+    </script>
+
+</head>
+<body>
+<div class="card">
+    <div layout:fragment="content">
+        <div class="container">
+            <h1>Login</h1>
+            <form th:action="@{/login}" method="post">
+
+                <label class ="label" for="email">Email: </label>
+                <input type="text" id="email" name="email" placeholder="Email" required autofocus/>
+
+                <label class ="label" for="password">Password: </label>
+                <input type="password" id="password" name="password" placeholder="Password"
+                       required minlength="6" maxlength="14"
+                       pattern="(?=.*[A-Za-z])(?=.*\d)(?=.*\W)[A-Za-z\d\W]{6,14}"
+                       title="Password must be between 6 and 14 characters long and contain at least one letter, one number, and one special character."/>
+                <label for="show-password">
+                    <input type="checkbox" id="show-password" onclick="togglePassword()"> Show Password
+                </label>
+
+                <button type="submit">Login</button>
+            </form>
+            <h3><a th:href="@{/signup}" style="font-size: smaller;">Don't you have an account?</a></h3>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

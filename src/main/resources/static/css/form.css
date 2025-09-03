@@ -1,0 +1,59 @@
+        .container {
+            margin: 10 px;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="email"],
+        input[type="password"],
+        input[type="text"],
+        input[type="submit"]{
+            padding: 10px;
+            margin-left:270px;
+            margin-bottom: 15px;
+            border: 2px solid black;
+            border-radius: 5px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px;
+            background-color: #5cb85c;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left:380px;
+            width:30%
+
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+
+        label {
+         margin-left:270px;
+        }
+
+        .image {
+         margin-left:100px;
+        }
+
+        h3 {
+          text-align: center;
+                    color: #333;
+        }
+
+
+

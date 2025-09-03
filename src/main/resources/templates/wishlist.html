@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout.html">
+<head>
+    <title>My Wishlist</title>
+    <link rel="stylesheet" th:href="@{/css/apartmentList.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Handler for adding an apartment to the wishlist
+            $('.add-to-wishlist').on('click', function() {
+                var apartmentId = $(this).data('apartment-id');
+                $.post('/wishlist/add/' + apartmentId, function(data) {
+                    alert(data);  // Alert the response message
+                    location.reload();  // Optionally, change the icon instead of reloading the page
+                }).fail(function() {
+                    alert('Failed to add to wishlist.');
+                });
+            });
+
+            // Handler for removing an apartment from the wishlist
+            $('.remove-from-wishlist').on('click', function() {
+                var apartmentId = $(this).data('apartment-id');
+                $.post('/wishlist/remove/' + apartmentId, function(data) {
+                    alert(data);  // Alert the response message
+                    location.reload();  // Optionally, change the icon instead of reloading the page
+                }).fail(function() {
+                    alert('Failed to remove from wishlist.');
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="wishlist">
+        <h1 class="title">My Wishlist</h1>
+        <div th:if="${wishlist?.apartments?.empty}">
+            <p>Your wishlist is empty.</p>
+            <p>Looks like you haven't added any apartments to your wishlist yet! Browse our <a href="/apartment">apartments</a>
+                to find your next dream home.</p>
+        </div>
+        <div th:if="not ${wishlist?.apartments?.empty}">
+            <div>
+                <div th:each="apartment : ${wishlist.apartments}" class="apartment-card">
+                    <div>
+                        <div><p th:text="${apartment.description}">Apartment Description</p> </div>
+                        <div> <p th:text="'Title: ' + ${apartment.title}"/> </div>
+                        <div> <p th:text="'Address: ' + ${apartment.address}"/> </div>
+                        <div> <p th:text="'Price: ' + ${apartment.price}"/> </div>
+                        <div><button class="remove-from-wishlist" th:data-apartment-id="${apartment.id}">
+                            Remove
+                        </button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
