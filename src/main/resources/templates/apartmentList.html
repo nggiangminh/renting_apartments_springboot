@@ -12,10 +12,10 @@
 <div>
 
     <div class="sort">
-        <label  for="sortOrder">SORT BY PRICE</label>
+        <label  for="sortOrder">SORT BY</label>
         <select id="sortOrder" onchange="window.location.href='?sort=' + this.value">
-            <option value="asc" th:selected="${sort == 'asc'}">PRICE ASC</option>
-            <option value="desc" th:selected="${sort == 'desc'}">PRICE DESC</option>
+            <option value="price_asc" th:selected="${sort == 'price_asc'}">PRICE ASC</option>
+            <option value="price_desc" th:selected="${sort == 'price_desc'}">PRICE DESC</option>
             <option value="area_asc" th:selected="${sort == 'area_asc'}">AREA ASC</option>
             <option value="area_desc" th:selected="${sort == 'area_desc'}">AREA DESC</option>
         </select>
@@ -26,7 +26,7 @@
 
     <div th:each="apartment : ${apartments}" class="apartment-card">
         <div>ID: <span th:text="${apartment.id}"></span></div>
-        <a th:href="'apartment/' + ${apartment.id}" th:text="${apartment.title}"/>
+        <a th:href="@{'/apartment/' + ${apartment.id}}" th:text="${apartment.title}"/>
         <div>Name: <span th:text="${apartment.title}"></span></div>
         <div>Price: <span th:text="${apartment.price}"></span></div>
         <div>Address: <span th:text="${apartment.address}"></span></div>

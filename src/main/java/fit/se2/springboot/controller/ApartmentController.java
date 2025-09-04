@@ -35,37 +35,27 @@ public class ApartmentController {
 
         if (authentication != null && authentication.isAuthenticated() && !authentication.getName().equals("anonymousUser")) {
             Long currentUserId = ((CustomUserDetails) authentication.getPrincipal()).getId();
-            switch (sort) {
-                case "price_desc":
-                    apartments = apartmentService.findAllExcludingUserOrderByPriceDesc(currentUserId);
-                    break;
-                case "area_asc":
-                    apartments = apartmentService.findAllExcludingUserOrderByAreaAsc(currentUserId);
-                    break;
-                case "area_desc":
-                    apartments = apartmentService.findAllExcludingUserOrderByAreaDesc(currentUserId);
-                    break;
-                default:
-                    apartments = apartmentService.findAllExcludingUserOrderByPriceAsc(currentUserId);
+            String normalized = (sort == null || sort.isBlank()) ? "price_asc" : sort;
+            switch (normalized) {
+                case "price_desc" -> apartments = apartmentService.findAllExcludingUserOrderByPriceDesc(currentUserId);
+                case "area_asc" -> apartments = apartmentService.findAllExcludingUserOrderByAreaAsc(currentUserId);
+                case "area_desc" -> apartments = apartmentService.findAllExcludingUserOrderByAreaDesc(currentUserId);
+                case "price_asc" -> apartments = apartmentService.findAllExcludingUserOrderByPriceAsc(currentUserId);
+                default -> apartments = apartmentService.findAllExcludingUserOrderByPriceAsc(currentUserId);
             }
         } else {
-            switch (sort) {
-                case "price_desc":
-                    apartments = apartmentService.findAllOrderByPriceDesc();
-                    break;
-                case "area_asc":
-                    apartments = apartmentService.findAllOrderByAreaAsc();
-                    break;
-                case "area_desc":
-                    apartments = apartmentService.findAllOrderByAreaDesc();
-                    break;
-                default:
-                    apartments = apartmentService.findAllOrderByPriceAsc();
+            String normalized = (sort == null || sort.isBlank()) ? "price_asc" : sort;
+            switch (normalized) {
+                case "price_desc" -> apartments = apartmentService.findAllOrderByPriceDesc();
+                case "area_asc" -> apartments = apartmentService.findAllOrderByAreaAsc();
+                case "area_desc" -> apartments = apartmentService.findAllOrderByAreaDesc();
+                case "price_asc" -> apartments = apartmentService.findAllOrderByPriceAsc();
+                default -> apartments = apartmentService.findAllOrderByPriceAsc();
             }
         }
 
         model.addAttribute("apartments", apartments);
-        model.addAttribute("sort", sort);
+        model.addAttribute("sort", (sort == null || sort.isBlank()) ? "price_asc" : sort);
         return "apartmentList";  // View that lists all apartments
     }
     @GetMapping("/my")
@@ -93,7 +83,7 @@ public class ApartmentController {
 
         if (!userId.equals(apartment.getOwner().getId())) {
             redirectAttributes.addFlashAttribute("error", "You are not the owner of this apartment.");
-            return "redirect:/apartment/list";  // Redirect to a safe and general page
+            return "redirect:/apartment";  // Redirect to list page
         }
         model.addAttribute("apartment", apartment);
         return "myApartmentDetail";  // apartment-details.html
