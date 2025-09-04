@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <title>Apartment Detail</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
     <script>
         $(document).ready(function() {
             $('#wishlist-button').click(function() {
@@ -29,7 +30,7 @@
 <body>
 <div layout:fragment="content">
     <h1>APARTMENT DETAIL</h1>
-    <div style="display: flex; flex-direction: row;">
+    <div class="detail-row">
         <div>
             <img th:src="${apartment.image}" width="210" height="210">
         </div>
